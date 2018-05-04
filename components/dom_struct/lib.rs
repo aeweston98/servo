@@ -24,3 +24,8 @@ pub fn dom_struct(args: TokenStream, input: TokenStream) -> TokenStream {
 
     attributes.into_iter().chain(input.into_iter()).collect()
 }
+
+#[proc_macro_attribute]
+pub fn webidl() {
+    
+}
