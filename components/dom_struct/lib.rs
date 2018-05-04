@@ -17,15 +17,11 @@ pub fn dom_struct(args: TokenStream, input: TokenStream) -> TokenStream {
         #[derive(DenyPublicFields, DomObject, JSTraceable, MallocSizeOf)]
         #[must_root]
         #[repr(C)]
+        #[webidl]
     };
 
     // Work around https://github.com/rust-lang/rust/issues/46489
     let attributes: TokenStream = attributes.to_string().parse().unwrap();
 
     attributes.into_iter().chain(input.into_iter()).collect()
-}
-
-#[proc_macro_attribute]
-pub fn webidl() {
-    
 }
