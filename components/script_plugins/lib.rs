@@ -38,6 +38,9 @@ mod unrooted_must_root;
 #[cfg(feature = "unrooted_must_root_lint")]
 mod utils;
 
+#[cfg(feature = "verify_webidl")]
+mod verify_webidl;
+
 #[plugin_registrar]
 pub fn plugin_registrar(reg: &mut Registry) {
     #[cfg(feature = "unrooted_must_root_lint")]
@@ -45,4 +48,7 @@ pub fn plugin_registrar(reg: &mut Registry) {
 
     reg.register_attribute("allow_unrooted_interior".to_string(), Whitelisted);
     reg.register_attribute("must_root".to_string(), Whitelisted);
+
+    #[cfg(feature = "verify_webidl")]
+    reg.register_late_lint_pass(Box::new(unrooted_must_root::WebIdlPass::new()));
 }
